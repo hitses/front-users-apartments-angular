@@ -8,7 +8,7 @@ import { catchError, map, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class ApartmentsService {
-  baseUrl = signal<string>('http://localhost:3000');
+  baseUrl = signal<string>('http://localhost:3000/apartments');
 
   private readonly http = inject(HttpClient);
 
@@ -17,7 +17,7 @@ export class ApartmentsService {
   }
 
   findAllApartments(): Observable<Apartment[]> {
-    const url = this.baseUrl() + `/apartment`;
+    const url = this.baseUrl();
 
     return this.http.get<Apartment[]>(url).pipe(
       map((resp) => resp),

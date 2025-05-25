@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { ApartmentsService } from './apartments.service';
 import { RouterLink } from '@angular/router';
-import { Apartment, ApartmentTable } from '../../interfaces/apartment';
+import { Apartment } from '../../interfaces/apartment';
 import { TableColumn } from '../../interfaces/table-column';
 import { DynamicTableComponent } from '../common/components/dynamic-table/dynamic-table.component';
 
