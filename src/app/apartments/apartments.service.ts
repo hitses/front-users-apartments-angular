@@ -12,8 +12,13 @@ export class ApartmentsService {
 
   private readonly http = inject(HttpClient);
 
-  createApartment(apartment: Apartment) {
-    console.log('createApartment', apartment);
+  createApartment(apartment: Apartment): Observable<Apartment> {
+    const url = this.baseUrl();
+
+    return this.http.post<Apartment>(url, apartment).pipe(
+      map((resp) => resp),
+      catchError((err) => throwError(() => err.error))
+    );
   }
 
   findAllApartments(): Observable<Apartment[]> {

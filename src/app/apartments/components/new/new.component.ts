@@ -3,13 +3,16 @@ import { ApartmentsService } from '../../apartments.service';
 import { Apartment } from '../../../../interfaces/apartment';
 import { BackButtonComponent } from '../../../common/components/back-button/back-button.component';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { apartmentForm } from '../../forms/apartment';
-import { isValidField } from '../../../common/utils/form-validation';
+import {
+  isValidField,
+  markAllFormFieldsAsTouched,
+} from '../../../common/utils/form-validation';
 
 @Component({
   selector: 'app-new',
-  imports: [BackButtonComponent],
+  imports: [BackButtonComponent, ReactiveFormsModule],
   templateUrl: './new.component.html',
   styleUrl: './new.component.scss',
 })
@@ -29,6 +32,16 @@ export default class NewComponent {
   apartmentForm: FormGroup = this.fb.group(apartmentForm);
 
   createApartment() {
-    this.apartmentsService.createApartment(this.apartment());
+    if (this.apartmentForm.invalid) {
+      markAllFormFieldsAsTouched(this.apartmentForm);
+
+      return;
+    }
+
+    this.apartmentsService.createApartment(this.apartmentForm.value).subscribe({
+      next: () => this.router.navigate(['/apartments']),
+      // TODO: mostrar un mensaje de error
+      error: (err) => console.log('ERROR', err),
+    });
   }
 }
