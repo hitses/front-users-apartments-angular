@@ -2,10 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 import { Apartment } from '../../../../interfaces/apartment';
 import { ActivatedRoute } from '@angular/router';
 import { ApartmentsService } from '../../apartments.service';
+import { BackButtonComponent } from '../../../common/back-button/back-button.component';
 
 @Component({
   selector: 'app-get-apartment',
-  imports: [],
+  imports: [BackButtonComponent],
   templateUrl: './get-apartment.component.html',
   styleUrl: './get-apartment.component.scss',
 })

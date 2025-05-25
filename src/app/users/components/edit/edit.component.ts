@@ -2,10 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UsersService } from '../../users.service';
 import { User } from '../../../../interfaces/user';
+import { BackButtonComponent } from '../../../common/back-button/back-button.component';
 
 @Component({
   selector: 'app-edit',
-  imports: [],
+  imports: [BackButtonComponent],
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.scss',
 })
