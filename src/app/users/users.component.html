@@ -11,3 +11,11 @@
 
   <button (click)="deleteUser(1)">Delete user 1</button>
 </div>
+
+<app-dynamic-table
+  [data]="users"
+  [columns]="userColumns"
+  viewRoutePrefix="/users"
+  editRoutePrefix="/users/edit"
+  (deleteItem)="deleteUser($event)"
+></app-dynamic-table>

@@ -6,3 +6,9 @@ export interface User {
   password: string;
   phone: string;
 }
+
+export interface UserTable {
+  id: number;
+  firstName: string;
+  email: string;
+}

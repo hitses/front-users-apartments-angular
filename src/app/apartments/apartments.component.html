@@ -11,3 +11,11 @@
 
   <button (click)="deleteApartment(1)">Delete apartment 1</button>
 </div>
+
+<app-dynamic-table
+  [data]="apartments"
+  [columns]="apartmentColumns"
+  viewRoutePrefix="/apartments"
+  editRoutePrefix="/apartments/edit"
+  (deleteItem)="deleteApartment($event)"
+></app-dynamic-table>

@@ -1,0 +1,27 @@
+<table>
+  <thead>
+    <tr>
+      @for (col of columns(); track $index) {
+      <th>{{ col.header }}</th>
+      }
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of data(); track $index) {
+    <tr>
+      @for (col of columns(); track $index) {
+      <td>{{ item[col.field] }}</td>
+      }
+      <td>
+        @if (viewRoutePrefix()) {
+        <a [routerLink]="getViewRoute(item)">View</a>
+        } @if (editRoutePrefix()) {
+        <a [routerLink]="getEditRoute(item)">Edit</a>
+        }
+        <button (click)="onDelete(item)">Delete</button>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>

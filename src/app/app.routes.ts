@@ -8,7 +8,7 @@ export const routes: Routes = [
     loadComponent: () => import('./users/components/new/new.component'),
   },
   {
-    path: 'users/edit',
+    path: 'users/edit/:id',
     loadComponent: () => import('./users/components/edit/edit.component'),
   },
   {
@@ -25,7 +25,7 @@ export const routes: Routes = [
     loadComponent: () => import('./apartments/components/new/new.component'),
   },
   {
-    path: 'apartments/edit',
+    path: 'apartments/edit/:id',
     loadComponent: () => import('./apartments/components/edit/edit.component'),
   },
   {
