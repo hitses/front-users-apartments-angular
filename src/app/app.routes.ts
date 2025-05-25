@@ -20,5 +20,18 @@ export const routes: Routes = [
     path: 'apartments',
     loadComponent: () => import('./apartments/apartments.component'),
   },
+  {
+    path: 'apartments/new',
+    loadComponent: () => import('./apartments/components/new/new.component'),
+  },
+  {
+    path: 'apartments/edit',
+    loadComponent: () => import('./apartments/components/edit/edit.component'),
+  },
+  {
+    path: 'apartments/:id',
+    loadComponent: () =>
+      import('./apartments/components/get-apartment/get-apartment.component'),
+  },
   { path: '**', redirectTo: 'users', pathMatch: 'full' },
 ];
