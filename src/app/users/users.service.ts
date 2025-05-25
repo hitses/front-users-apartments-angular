@@ -1,16 +1,27 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { User } from '../../interfaces/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
+  baseUrl = signal<string>('http://localhost:3000');
+
+  private readonly http = inject(HttpClient);
+
   createUser(user: User) {
     console.log('createUser', user);
   }
 
-  findAllUsers() {
-    console.log('findAllUsers');
+  findAllUsers(): Observable<User[]> {
+    const url = this.baseUrl() + `/users`;
+
+    return this.http.get<User[]>(url).pipe(
+      map((resp) => resp),
+      catchError((err) => throwError(() => err.error))
+    );
   }
 
   findUser(id: number) {

@@ -12,17 +12,12 @@ import { TableColumn } from '../../interfaces/table-column';
   styleUrl: './users.component.scss',
 })
 export default class UsersComponent {
-  users: UserTable[] = [
-    { id: 1, firstName: 'Juan Pérez', email: 'juan@example.com' },
-    { id: 2, firstName: 'María García', email: 'maria@example.com' },
-    { id: 3, firstName: 'Carlos López', email: 'carlos@example.com' },
-  ];
-
-  userColumns: TableColumn[] = [
+  users = signal<User[]>([]);
+  userColumns = signal<TableColumn[]>([
     { field: 'id', header: 'ID' },
     { field: 'firstName', header: 'Nombre' },
     { field: 'email', header: 'Email' },
-  ];
+  ]);
 
   private usersService = inject(UsersService);
 
@@ -31,7 +26,9 @@ export default class UsersComponent {
   }
 
   findAllUsers() {
-    this.usersService.findAllUsers();
+    this.usersService.findAllUsers().subscribe((users) => {
+      this.users.set(users);
+    });
   }
 
   deleteUser(id: number) {
