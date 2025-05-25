@@ -30,8 +30,13 @@ export class ApartmentsService {
     );
   }
 
-  findApartment(id: number) {
-    console.log('findApartment', id);
+  findApartment(id: number): Observable<Apartment> {
+    const url = this.baseUrl() + `/${id}`;
+
+    return this.http.get<Apartment>(url).pipe(
+      map((resp) => resp),
+      catchError((err) => throwError(() => err.error))
+    );
   }
 
   updateApartment(id: number, apartment: Apartment) {

@@ -27,7 +27,6 @@ export default class GetUsersComponent {
   }
 
   getUser() {
-    console.log('pillo el user');
     this.usersService.findUser(this.userId()).subscribe({
       next: (user) => this.user.set(user),
       error: (err) => console.log('ERROR', err),
