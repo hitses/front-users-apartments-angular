@@ -32,7 +32,10 @@ export default class ApartmentsComponent {
     });
   }
 
-  deleteApartment(id: number) {
-    this.apartmentsService.deleteApartment(id);
+  deleteApartment(id: number): void {
+    this.apartmentsService.deleteApartment(id).subscribe({
+      next: () => this.findAllApartments(),
+      error: (err) => console.log('ERROR', err),
+    });
   }
 }

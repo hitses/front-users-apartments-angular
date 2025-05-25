@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { User, UserTable } from '../../interfaces/user';
+import { User } from '../../interfaces/user';
 import { UsersService } from './users.service';
 import { RouterLink } from '@angular/router';
 import { DynamicTableComponent } from '../common/components/dynamic-table/dynamic-table.component';

@@ -48,7 +48,12 @@ export class ApartmentsService {
     );
   }
 
-  deleteApartment(id: number) {
-    console.log('deleteApartment', id);
+  deleteApartment(id: number): Observable<void> {
+    const url = this.baseUrl() + `/${id}`;
+
+    return this.http.delete<void>(url).pipe(
+      map((resp) => resp),
+      catchError((err) => throwError(() => err.error))
+    );
   }
 }
