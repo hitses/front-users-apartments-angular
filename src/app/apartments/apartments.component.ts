@@ -3,7 +3,7 @@ import { ApartmentsService } from './apartments.service';
 import { RouterLink } from '@angular/router';
 import { ApartmentTable } from '../../interfaces/apartment';
 import { TableColumn } from '../../interfaces/table-column';
-import { DynamicTableComponent } from '../common/dynamic-table/dynamic-table.component';
+import { DynamicTableComponent } from '../common/components/dynamic-table/dynamic-table.component';
 
 @Component({
   selector: 'app-apartments',

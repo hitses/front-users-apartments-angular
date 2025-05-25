@@ -1,5 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import { TableColumn } from '../../../interfaces/table-column';
+import { TableColumn } from '../../../../interfaces/table-column';
 import { RouterLink } from '@angular/router';
 
 @Component({

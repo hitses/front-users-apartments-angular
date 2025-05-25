@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../../../../interfaces/user';
 import { UsersService } from '../../users.service';
-import { BackButtonComponent } from '../../../common/back-button/back-button.component';
+import { BackButtonComponent } from '../../../common/components/back-button/back-button.component';
 
 @Component({
   selector: 'app-users',

@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { ApartmentsService } from '../../apartments.service';
 import { Apartment } from '../../../../interfaces/apartment';
-import { BackButtonComponent } from '../../../common/back-button/back-button.component';
+import { BackButtonComponent } from '../../../common/components/back-button/back-button.component';
 
 @Component({
   selector: 'app-new',
