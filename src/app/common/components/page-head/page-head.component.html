@@ -1,0 +1,9 @@
+<div class="flex justify-between items-center">
+  <page-title-component [title]="pageTitle()" />
+
+  <a
+    [routerLink]="link()"
+    class="bg-green-600 text-white px-2 py-1 rounded-md hover:bg-green-700 transition-colors"
+    >{{ linkText() }}</a
+  >
+</div>

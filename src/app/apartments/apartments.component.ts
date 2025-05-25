@@ -1,13 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
 import { ApartmentsService } from './apartments.service';
-import { RouterLink } from '@angular/router';
 import { Apartment } from '../../interfaces/apartment';
 import { TableColumn } from '../../interfaces/table-column';
 import { DynamicTableComponent } from '../common/components/dynamic-table/dynamic-table.component';
+import { PageHeadComponent } from '../common/components/page-head/page-head.component';
 
 @Component({
   selector: 'app-apartments',
-  imports: [RouterLink, DynamicTableComponent],
+  imports: [DynamicTableComponent, PageHeadComponent],
   templateUrl: './apartments.component.html',
   styleUrl: './apartments.component.scss',
 })

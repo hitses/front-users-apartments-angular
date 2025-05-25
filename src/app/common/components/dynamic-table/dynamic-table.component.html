@@ -1,31 +1,48 @@
-@if (data().length <= 0) {
-<p>No hay datos</p>
-} @else {
-<table>
-  <thead>
-    <tr>
-      @for (col of columns(); track $index) {
-      <th>{{ col.header }}</th>
-      }
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (item of data(); track $index) {
-    <tr>
-      @for (col of columns(); track $index) {
-      <td>{{ item[col.field] }}</td>
-      }
-      <td>
-        @if (viewRoutePrefix()) {
-        <a [routerLink]="getViewRoute(item)">View</a>
-        } @if (editRoutePrefix()) {
-        <a [routerLink]="getEditRoute(item)">Edit</a>
+<section class="mt-4">
+  @if (data().length <= 0) {
+  <p class="text-center text-sm">No data available</p>
+  } @else {
+  <table class="w-full text-sm text-left text-gray-900">
+    <thead class="font-semibold uppercase bg-gray-100">
+      <tr>
+        @for (col of columns(); track $index) {
+        <th class="px-4 py-2">{{ col.header }}</th>
         }
-        <button (click)="onDelete(item.id)">Delete</button>
-      </td>
-    </tr>
-    }
-  </tbody>
-</table>
-}
+        <th class="px-4 py-2">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of data(); track $index) {
+      <tr class="odd:bg-gray-50 even:bg-white">
+        @for (col of columns(); track $index) {
+        <td class="px-4 py-2">{{ item[col.field] }}</td>
+        }
+        <td class="px-4 py-2 flex justify-end gap-2">
+          @if (viewRoutePrefix()) {
+          <a
+            [routerLink]="getViewRoute(item)"
+            class="bg-blue-400 px-2 py-1 rounded-md text-white hover:bg-blue-500 transition-colors"
+          >
+            <file-icon />
+          </a>
+          } @if (editRoutePrefix()) {
+          <a
+            [routerLink]="getEditRoute(item)"
+            class="bg-yellow-400 px-2 py-1 rounded-md hover:bg-yellow-500 transition-colors"
+          >
+            <edit-icon />
+          </a>
+          }
+          <button
+            (click)="onDelete(item.id)"
+            class="bg-red-500 px-2 py-1 rounded-md text-white hover:bg-red-600 cursor-pointer transition-colors"
+          >
+            <trash-icon />
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+  }
+</section>

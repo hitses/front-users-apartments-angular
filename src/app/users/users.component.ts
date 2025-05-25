@@ -4,10 +4,17 @@ import { UsersService } from './users.service';
 import { RouterLink } from '@angular/router';
 import { DynamicTableComponent } from '../common/components/dynamic-table/dynamic-table.component';
 import { TableColumn } from '../../interfaces/table-column';
+import { PageTitleComponent } from '../common/components/page-title/page-title.component';
+import { PageHeadComponent } from '../common/components/page-head/page-head.component';
 
 @Component({
   selector: 'app-users',
-  imports: [RouterLink, DynamicTableComponent],
+  imports: [
+    RouterLink,
+    DynamicTableComponent,
+    PageTitleComponent,
+    PageHeadComponent,
+  ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
 })

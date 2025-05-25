@@ -1,8 +1,8 @@
-<h1>Apartments</h1>
-
-<div>
-  <a routerLink="/apartments/new">New apartment</a>
-</div>
+<page-head-component
+  [pageTitle]="'Apartments'"
+  [link]="'/apartments/new'"
+  [linkText]="'New apartment'"
+/>
 
 <app-dynamic-table
   [data]="apartments()"

@@ -1,8 +1,8 @@
-<h1>Users</h1>
-
-<div>
-  <a routerLink="/users/new">New user</a>
-</div>
+<page-head-component
+  [pageTitle]="'Users'"
+  [link]="'/users/new'"
+  [linkText]="'New user'"
+/>
 
 <app-dynamic-table
   [data]="users()"
