@@ -4,7 +4,7 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { EMAIL_PATTERN, PASSWORD_PATTERN } from '../types/patterns';
+import { EMAIL_PATTERN, PASSWORD_PATTERN } from '../../../types/patterns';
 
 const getPasswordErrors = (
   passwordControl: AbstractControl

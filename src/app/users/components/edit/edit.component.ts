@@ -4,7 +4,7 @@ import { UsersService } from '../../users.service';
 import { User } from '../../../../interfaces/user';
 import { BackButtonComponent } from '../../../common/components/back-button/back-button.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { userForm, userFormValidators } from '../../../../forms/user';
+import { userForm, userFormValidators } from '../../forms/user';
 
 @Component({
   selector: 'app-edit',

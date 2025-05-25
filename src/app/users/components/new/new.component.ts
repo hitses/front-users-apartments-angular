@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { UsersService } from '../../users.service';
 import { BackButtonComponent } from '../../../common/components/back-button/back-button.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { userForm, userFormValidators } from '../../../../forms/user';
+import { userForm, userFormValidators } from '../../forms/user';
 import { Router } from '@angular/router';
 
 @Component({
