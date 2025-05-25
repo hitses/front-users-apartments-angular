@@ -4,14 +4,6 @@
   <a routerLink="/users/new">New user</a>
 </div>
 
-<div>
-  <a routerLink="/users/1">User 1</a>
-
-  <a routerLink="/users/edit">Edit user</a>
-
-  <button (click)="deleteUser(1)">Delete user 1</button>
-</div>
-
 <app-dynamic-table
   [data]="users()"
   [columns]="userColumns()"

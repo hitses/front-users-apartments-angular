@@ -4,14 +4,6 @@
   <a routerLink="/apartments/new">New apartment</a>
 </div>
 
-<div>
-  <a routerLink="/apartments/1">Apartment 1</a>
-
-  <a routerLink="/apartments/edit">Edit apartment</a>
-
-  <button (click)="deleteApartment(1)">Delete apartment 1</button>
-</div>
-
 <app-dynamic-table
   [data]="apartments()"
   [columns]="apartmentColumns()"
