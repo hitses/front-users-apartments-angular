@@ -5,7 +5,10 @@ import { User } from '../../../../interfaces/user';
 import { BackButtonComponent } from '../../../common/components/back-button/back-button.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { userForm, userFormValidators } from '../../forms/user';
-import { isValidField } from '../../../common/utils/form-validation';
+import {
+  isValidField,
+  markAllFormFieldsAsTouched,
+} from '../../../common/utils/form-validation';
 
 @Component({
   selector: 'app-edit',
@@ -52,13 +55,12 @@ export default class EditComponent {
 
   editUser() {
     if (this.userForm.invalid) {
-      this.userForm.markAllAsTouched();
+      markAllFormFieldsAsTouched(this.userForm);
+
       return;
     }
 
-    const editUser = this.userForm.value;
-
-    this.usersService.updateUser(this.userId(), editUser).subscribe({
+    this.usersService.updateUser(this.userId(), this.userForm.value).subscribe({
       next: () => this.router.navigate(['/users']),
       // TODO: mostrar un mensaje de error
       error: (err) => console.log('ERROR', err),

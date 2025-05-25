@@ -39,8 +39,13 @@ export class ApartmentsService {
     );
   }
 
-  updateApartment(id: number, apartment: Apartment) {
-    console.log('updateApartment', id, apartment);
+  editApartment(id: number, apartment: Apartment): Observable<Apartment> {
+    const url = this.baseUrl() + `/${id}`;
+
+    return this.http.put<Apartment>(url, apartment).pipe(
+      map((resp) => resp),
+      catchError((err) => throwError(() => err.error))
+    );
   }
 
   deleteApartment(id: number) {

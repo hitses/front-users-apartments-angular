@@ -1,3 +1,53 @@
 <back-button-component />
 
-<p>edit apartment!</p>
+<form [formGroup]="apartmentForm" (ngSubmit)="editApartment()">
+  <label
+    for="rooms"
+    [class]="!validField(apartmentForm, 'rooms') ? '' : 'text-red-400'"
+  >
+    Rooms
+    <input type="number" formControlName="rooms" min="1" />
+  </label>
+
+  <label
+    for="bathrooms"
+    [class]="!validField(apartmentForm, 'bathrooms') ? '' : 'text-red-400'"
+  >
+    Bathrooms
+    <input type="number" formControlName="bathrooms" min="1" />
+  </label>
+
+  <label
+    for="area"
+    [class]="!validField(apartmentForm, 'area') ? '' : 'text-red-400'"
+  >
+    Area
+    <input type="number" formControlName="area" min="1" />
+  </label>
+
+  <label
+    for="floor"
+    [class]="!validField(apartmentForm, 'floor') ? '' : 'text-red-400'"
+  >
+    Floor
+    <input type="number" formControlName="floor" min="1" />
+  </label>
+
+  <label
+    for="description"
+    [class]="!validField(apartmentForm, 'description') ? '' : 'text-red-400'"
+  >
+    Description
+    <textarea formControlName="description"></textarea>
+  </label>
+
+  <label
+    for="price"
+    [class]="!validField(apartmentForm, 'price') ? '' : 'text-red-400'"
+  >
+    Price
+    <input type="number" formControlName="price" min="0.01" step="0.01" />
+  </label>
+
+  <button type="submit">Save</button>
+</form>
