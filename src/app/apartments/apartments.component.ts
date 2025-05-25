@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ApartmentsService } from './apartments.service';
 import { RouterLink } from '@angular/router';
-import { ApartmentTable } from '../../interfaces/apartment';
+import { Apartment, ApartmentTable } from '../../interfaces/apartment';
 import { TableColumn } from '../../interfaces/table-column';
 import { DynamicTableComponent } from '../common/components/dynamic-table/dynamic-table.component';
 
@@ -12,17 +12,12 @@ import { DynamicTableComponent } from '../common/components/dynamic-table/dynami
   styleUrl: './apartments.component.scss',
 })
 export default class ApartmentsComponent {
-  apartments: ApartmentTable[] = [
-    { id: 101, rooms: 3, price: 150000 },
-    { id: 102, rooms: 2, price: 95000 },
-    { id: 103, rooms: 4, price: 210000 },
-  ];
-
-  apartmentColumns: TableColumn[] = [
+  apartments = signal<Apartment[]>([]);
+  apartmentColumns = signal<TableColumn[]>([
     { field: 'id', header: 'ID' },
     { field: 'rooms', header: 'Habitaciones' },
     { field: 'price', header: 'Precio' },
-  ];
+  ]);
 
   private apartmentsService = inject(ApartmentsService);
 
@@ -32,6 +27,9 @@ export default class ApartmentsComponent {
 
   findAllApartments() {
     this.apartmentsService.findAllApartments();
+    this.apartmentsService.findAllApartments().subscribe((apartments) => {
+      this.apartments.set(apartments);
+    });
   }
 
   deleteApartment(id: number) {

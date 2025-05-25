@@ -13,8 +13,8 @@
 </div>
 
 <app-dynamic-table
-  [data]="apartments"
-  [columns]="apartmentColumns"
+  [data]="apartments()"
+  [columns]="apartmentColumns()"
   viewRoutePrefix="/apartments"
   editRoutePrefix="/apartments/edit"
   (deleteItem)="deleteApartment($event)"
