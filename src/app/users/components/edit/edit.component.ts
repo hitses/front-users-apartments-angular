@@ -1,36 +1,68 @@
 import { Component, inject, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../../users.service';
 import { User } from '../../../../interfaces/user';
 import { BackButtonComponent } from '../../../common/components/back-button/back-button.component';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { userForm, userFormValidators } from '../../../../forms/user';
 
 @Component({
   selector: 'app-edit',
-  imports: [BackButtonComponent],
+  imports: [BackButtonComponent, ReactiveFormsModule],
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.scss',
 })
 export default class EditComponent {
   userId = signal<number>(0);
-  user = signal<User>({
-    username: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    phone: '',
-  });
+  user = signal<User>({} as User);
 
+  private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
+  private readonly fb = inject(FormBuilder);
   private readonly usersService = inject(UsersService);
+
+  constructor() {
+    this.userForm = this.fb.group(userForm, {
+      validators: userFormValidators,
+    });
+
+    this.userForm.removeControl('password');
+    this.userForm.removeControl('confirmPassword');
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.userId.set(params['id']);
     });
+
+    this.getUser();
+  }
+
+  userForm: FormGroup;
+
+  validField(field: string) {
+    const control = this.userForm.get(field);
+    return control && control.errors && control.touched;
+  }
+
+  getUser() {
+    this.usersService.findUser(this.userId()).subscribe({
+      next: (user) => this.userForm.patchValue(user),
+      error: (err) => console.log('ERROR', err),
+    });
   }
 
   editUser() {
-    this.usersService.updateUser(this.userId(), this.user());
+    if (this.userForm.invalid) {
+      this.userForm.markAllAsTouched();
+      return;
+    }
+
+    const editUser = this.userForm.value;
+
+    this.usersService.updateUser(this.userId(), editUser).subscribe({
+      next: () => this.router.navigate(['/users']),
+      error: (err) => console.log('ERROR', err),
+    });
   }
 }

@@ -38,8 +38,13 @@ export class UsersService {
     );
   }
 
-  updateUser(id: number, user: User) {
-    console.log('updateUser', id, user);
+  updateUser(id: number, user: User): Observable<User> {
+    const url = this.baseUrl() + `/${id}`;
+
+    return this.http.put<User>(url, user).pipe(
+      map((resp) => resp),
+      catchError((err) => throwError(() => err.error))
+    );
   }
 
   deleteUser(id: number) {

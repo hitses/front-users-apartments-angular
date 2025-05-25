@@ -23,36 +23,36 @@ const getPasswordErrors = (
 };
 
 export const userForm = {
-  username: new FormControl('prueba', [
+  username: new FormControl('', [
     Validators.required,
     Validators.minLength(2),
     Validators.maxLength(20),
   ]),
-  firstName: new FormControl('prueba', [
+  firstName: new FormControl('', [
     Validators.required,
     Validators.minLength(2),
     Validators.maxLength(50),
   ]),
-  lastName: new FormControl('prueba', [
+  lastName: new FormControl('', [
     Validators.required,
     Validators.minLength(2),
     Validators.maxLength(50),
   ]),
-  email: new FormControl('prueba@prueba.com', [
+  email: new FormControl('', [
     Validators.required,
     Validators.pattern(EMAIL_PATTERN),
   ]),
-  phone: new FormControl('000000001', [
+  phone: new FormControl('', [
     Validators.required,
     Validators.minLength(9),
     Validators.maxLength(9),
   ]),
-  password: new FormControl('123123aS', [
+  password: new FormControl('', [
     Validators.required,
     Validators.pattern(PASSWORD_PATTERN),
     getPasswordErrors,
   ]),
-  confirmPassword: new FormControl('123123aS', [
+  confirmPassword: new FormControl('', [
     Validators.required,
     Validators.pattern(PASSWORD_PATTERN),
   ]),
