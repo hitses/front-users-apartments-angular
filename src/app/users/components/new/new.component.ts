@@ -4,6 +4,10 @@ import { BackButtonComponent } from '../../../common/components/back-button/back
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { userForm, userFormValidators } from '../../forms/user';
 import { Router } from '@angular/router';
+import {
+  isValidField,
+  markAllFormFieldsAsTouched,
+} from '../../../common/utils/form-validation';
 
 @Component({
   selector: 'app-new',
@@ -12,7 +16,10 @@ import { Router } from '@angular/router';
   styleUrl: './new.component.scss',
 })
 export default class NewComponent {
-  notSamePassword = signal<boolean>(false);
+  // TODO: comprobar el uso de esta propiedad
+  private notSamePassword = signal<boolean>(false);
+
+  public validField = isValidField;
 
   private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);
@@ -26,16 +33,10 @@ export default class NewComponent {
     validators: userFormValidators,
   });
 
-  validField(field: string) {
-    return (
-      this.userForm.controls[field].errors &&
-      this.userForm.controls[field].touched
-    );
-  }
-
   createUser() {
     if (this.userForm.invalid) {
-      this.userForm.markAllAsTouched();
+      markAllFormFieldsAsTouched(this.userForm);
+
       return;
     }
 

@@ -1,42 +1,57 @@
 <back-button-component />
 
 <form [formGroup]="userForm" (ngSubmit)="createUser()">
-  <label for="username" [class]="!validField('username') ? '' : 'text-red-400'">
+  <label
+    for="username"
+    [class]="!validField(userForm, 'username') ? '' : 'text-red-400'"
+  >
     Username
     <input type="text" formControlName="username" />
   </label>
 
   <label
     for="firstName"
-    [class]="!validField('firstName') ? '' : 'text-red-400'"
+    [class]="!validField(userForm, 'firstName') ? '' : 'text-red-400'"
   >
     First name
     <input type="text" formControlName="firstName" />
   </label>
 
-  <label for="lastName" [class]="!validField('lastName') ? '' : 'text-red-400'">
+  <label
+    for="lastName"
+    [class]="!validField(userForm, 'lastName') ? '' : 'text-red-400'"
+  >
     Last name
     <input type="text" formControlName="lastName" />
   </label>
 
-  <label for="email" [class]="!validField('email') ? '' : 'text-red-400'">
+  <label
+    for="email"
+    [class]="!validField(userForm, 'email') ? '' : 'text-red-400'"
+  >
     Email
     <input type="email" formControlName="email" />
   </label>
 
-  <label for="phone" [class]="!validField('phone') ? '' : 'text-red-400'">
+  <label
+    for="phone"
+    [class]="!validField(userForm, 'phone') ? '' : 'text-red-400'"
+  >
     Phone
     <input type="text" formControlName="phone" />
   </label>
 
-  <label for="password" [class]="!validField('password') ? '' : 'text-red-400'">
+  <label
+    for="password"
+    [class]="!validField(userForm, 'password') ? '' : 'text-red-400'"
+  >
     Password
     <input type="password" formControlName="password" />
   </label>
 
   <label
     for="confirmPassword"
-    [class]="!validField('confirmPassword') ? '' : 'text-red-400'"
+    [class]="!validField(userForm, 'confirmPassword') ? '' : 'text-red-400'"
   >
     Confirm password
     <input type="password" formControlName="confirmPassword" />

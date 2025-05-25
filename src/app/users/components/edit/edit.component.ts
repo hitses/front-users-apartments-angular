@@ -5,6 +5,7 @@ import { User } from '../../../../interfaces/user';
 import { BackButtonComponent } from '../../../common/components/back-button/back-button.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { userForm, userFormValidators } from '../../forms/user';
+import { isValidField } from '../../../common/utils/form-validation';
 
 @Component({
   selector: 'app-edit',
@@ -15,6 +16,8 @@ import { userForm, userFormValidators } from '../../forms/user';
 export default class EditComponent {
   userId = signal<number>(0);
   user = signal<User>({} as User);
+
+  public validField = isValidField;
 
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
@@ -39,11 +42,6 @@ export default class EditComponent {
   }
 
   userForm: FormGroup;
-
-  validField(field: string) {
-    const control = this.userForm.get(field);
-    return control && control.errors && control.touched;
-  }
 
   getUser() {
     this.usersService.findUser(this.userId()).subscribe({
