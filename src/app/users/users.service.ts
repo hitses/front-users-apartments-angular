@@ -7,16 +7,21 @@ import { User } from '../../interfaces/user';
   providedIn: 'root',
 })
 export class UsersService {
-  baseUrl = signal<string>('http://localhost:3000');
+  baseUrl = signal<string>('http://localhost:3000/users');
 
   private readonly http = inject(HttpClient);
 
-  createUser(user: User) {
-    console.log('createUser', user);
+  createUser(user: User): Observable<User> {
+    const url = this.baseUrl();
+
+    return this.http.post<User>(url, user).pipe(
+      map((resp) => resp),
+      catchError((err) => throwError(() => err.error))
+    );
   }
 
   findAllUsers(): Observable<User[]> {
-    const url = this.baseUrl() + `/users`;
+    const url = this.baseUrl();
 
     return this.http.get<User[]>(url).pipe(
       map((resp) => resp),
