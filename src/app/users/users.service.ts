@@ -47,7 +47,12 @@ export class UsersService {
     );
   }
 
-  deleteUser(id: number) {
-    console.log('deleteUser', id);
+  deleteUser(id: number): Observable<void> {
+    const url = this.baseUrl() + `/${id}`;
+
+    return this.http.delete<void>(url).pipe(
+      map((resp) => resp),
+      catchError((err) => throwError(() => err.error))
+    );
   }
 }

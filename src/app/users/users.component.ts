@@ -32,6 +32,9 @@ export default class UsersComponent {
   }
 
   deleteUser(id: number) {
-    this.usersService.deleteUser(id);
+    this.usersService.deleteUser(id).subscribe({
+      next: () => this.findAllUsers(),
+      error: (err) => console.log('ERROR', err),
+    });
   }
 }

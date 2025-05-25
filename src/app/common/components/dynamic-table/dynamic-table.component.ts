@@ -16,8 +16,8 @@ export class DynamicTableComponent {
 
   deleteItem = output<number>();
 
-  onDelete(item: number): void {
-    this.deleteItem.emit(item);
+  onDelete(id: number): void {
+    this.deleteItem.emit(id);
   }
 
   getViewRoute(item: any): string {

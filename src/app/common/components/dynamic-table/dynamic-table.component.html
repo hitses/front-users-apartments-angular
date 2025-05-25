@@ -22,7 +22,7 @@
         } @if (editRoutePrefix()) {
         <a [routerLink]="getEditRoute(item)">Edit</a>
         }
-        <button (click)="onDelete(item)">Delete</button>
+        <button (click)="onDelete(item.id)">Delete</button>
       </td>
     </tr>
     }

@@ -62,6 +62,7 @@ export default class EditComponent {
 
     this.usersService.updateUser(this.userId(), editUser).subscribe({
       next: () => this.router.navigate(['/users']),
+      // TODO: mostrar un mensaje de error
       error: (err) => console.log('ERROR', err),
     });
   }
