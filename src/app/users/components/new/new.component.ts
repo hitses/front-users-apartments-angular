@@ -1,24 +1,27 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { UsersService } from '../../users.service';
 import { BackButtonComponent } from '../../../common/components/back-button/back-button.component';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { userForm, userFormValidators } from '../../forms/user';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  userCreateFields,
+  userFormValidations,
+  userFormValidators,
+} from '../../forms/user';
 import { Router } from '@angular/router';
 import {
   isValidField,
   markAllFormFieldsAsTouched,
 } from '../../../common/utils/form-validation';
+import { DynamicFormComponent } from '../../../common/components/dynamic-form/dynamic-form.component';
 
 @Component({
   selector: 'app-new',
-  imports: [BackButtonComponent, ReactiveFormsModule],
+  imports: [BackButtonComponent, DynamicFormComponent],
   templateUrl: './new.component.html',
   styleUrl: './new.component.scss',
 })
 export default class NewComponent {
-  // TODO: comprobar el uso de esta propiedad
-  private notSamePassword = signal<boolean>(false);
-
+  public formFields = userCreateFields;
   public validField = isValidField;
 
   private readonly router = inject(Router);
@@ -29,7 +32,7 @@ export default class NewComponent {
     this.userForm.reset();
   }
 
-  userForm: FormGroup = this.fb.group(userForm, {
+  userForm: FormGroup = this.fb.group(userFormValidations, {
     validators: userFormValidators,
   });
 

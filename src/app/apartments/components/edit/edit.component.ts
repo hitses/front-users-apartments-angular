@@ -8,19 +8,23 @@ import {
   markAllFormFieldsAsTouched,
 } from '../../../common/utils/form-validation';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { apartmentForm } from '../../forms/apartment';
+import {
+  apartmentFields,
+  apartmentFormValidations,
+} from '../../forms/apartment';
+import { DynamicFormComponent } from '../../../common/components/dynamic-form/dynamic-form.component';
 
 @Component({
   selector: 'app-edit',
-  imports: [BackButtonComponent, ReactiveFormsModule],
+  imports: [BackButtonComponent, DynamicFormComponent],
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.scss',
 })
 export default class EditComponent {
-  apartmentId = signal<number>(0);
-  apartment = signal<Apartment>({} as Apartment);
-
+  public formFields = apartmentFields;
   public validField = isValidField;
+
+  apartmentId = signal<number>(0);
 
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
@@ -28,18 +32,14 @@ export default class EditComponent {
   private readonly apartmentsService = inject(ApartmentsService);
 
   constructor() {
-    this.apartmentForm = this.fb.group(apartmentForm);
-
-    this.apartmentForm.removeControl('password');
-    this.apartmentForm.removeControl('confirmPassword');
+    this.apartmentForm = this.fb.group(apartmentFormValidations);
   }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.apartmentId.set(params['id']);
+      this.getApartment();
     });
-
-    this.getApartment();
   }
 
   apartmentForm: FormGroup;

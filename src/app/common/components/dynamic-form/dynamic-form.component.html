@@ -1,0 +1,23 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  @for (field of fields; track field.name) { @if (!field.hidden) {
+  <label
+    [for]="field.name"
+    [class]="!isValidField(formGroup, field.name) ? '' : 'text-red-400'"
+  >
+    {{ field.label }}
+    @if (field.type === 'textarea') {
+    <textarea [formControlName]="field.name"></textarea>
+    } @else {
+    <input
+      [type]="field.type"
+      [formControlName]="field.name"
+      [min]="field.min"
+      [max]="field.max"
+      [step]="field.step"
+    />
+    }
+  </label>
+  } }
+
+  <button type="submit">{{ submitButtonText }}</button>
+</form>

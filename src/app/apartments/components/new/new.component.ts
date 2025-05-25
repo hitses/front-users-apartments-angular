@@ -1,24 +1,26 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ApartmentsService } from '../../apartments.service';
-import { Apartment } from '../../../../interfaces/apartment';
 import { BackButtonComponent } from '../../../common/components/back-button/back-button.component';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { apartmentForm } from '../../forms/apartment';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  apartmentFields,
+  apartmentFormValidations,
+} from '../../forms/apartment';
 import {
   isValidField,
   markAllFormFieldsAsTouched,
 } from '../../../common/utils/form-validation';
+import { DynamicFormComponent } from '../../../common/components/dynamic-form/dynamic-form.component';
 
 @Component({
   selector: 'app-new',
-  imports: [BackButtonComponent, ReactiveFormsModule],
+  imports: [BackButtonComponent, DynamicFormComponent],
   templateUrl: './new.component.html',
   styleUrl: './new.component.scss',
 })
 export default class NewComponent {
-  apartment = signal<Apartment>({} as Apartment);
-
+  public formFields = apartmentFields;
   public validField = isValidField;
 
   private readonly router = inject(Router);
@@ -29,7 +31,7 @@ export default class NewComponent {
     this.apartmentForm.reset();
   }
 
-  apartmentForm: FormGroup = this.fb.group(apartmentForm);
+  apartmentForm: FormGroup = this.fb.group(apartmentFormValidations);
 
   createApartment() {
     if (this.apartmentForm.invalid) {

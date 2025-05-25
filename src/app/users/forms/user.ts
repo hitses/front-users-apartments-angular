@@ -5,6 +5,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { EMAIL_PATTERN, PASSWORD_PATTERN } from '../../../types/patterns';
+import { FormField } from '../../../types/form-field';
 
 const getPasswordErrors = (
   passwordControl: AbstractControl
@@ -22,7 +23,7 @@ const getPasswordErrors = (
   return Object.keys(errors).length > 0 ? errors : null;
 };
 
-export const userForm = {
+export const userFormValidations = {
   username: new FormControl('', [
     Validators.required,
     Validators.minLength(2),
@@ -64,5 +65,30 @@ export const userFormValidators = [
     const confirmPassword = group.get('confirmPassword')?.value;
 
     return password === confirmPassword ? null : { passwordsMismatch: true };
+  },
+];
+
+export const userCreateFields: FormField[] = [
+  { name: 'username', label: 'Username', type: 'text' },
+  { name: 'firstName', label: 'First name', type: 'text' },
+  { name: 'lastName', label: 'Last name', type: 'text' },
+  { name: 'email', label: 'Email', type: 'email' },
+  { name: 'phone', label: 'Phone', type: 'text' },
+  { name: 'password', label: 'Password', type: 'password' },
+  { name: 'confirmPassword', label: 'Confirm password', type: 'password' },
+];
+
+export const userEditFields: FormField[] = [
+  { name: 'username', label: 'Username', type: 'text' },
+  { name: 'firstName', label: 'First name', type: 'text' },
+  { name: 'lastName', label: 'Last name', type: 'text' },
+  { name: 'email', label: 'Email', type: 'email' },
+  { name: 'phone', label: 'Phone', type: 'text' },
+  { name: 'password', label: 'Password', type: 'password', hidden: true },
+  {
+    name: 'confirmPassword',
+    label: 'Confirm password',
+    type: 'password',
+    hidden: true,
   },
 ];

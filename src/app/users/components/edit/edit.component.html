@@ -1,45 +1,10 @@
 <back-button-component />
 
-<form [formGroup]="userForm" (ngSubmit)="editUser()">
-  <label
-    for="username"
-    [class]="!validField(userForm, 'username') ? '' : 'text-red-400'"
-  >
-    Username
-    <input type="text" formControlName="username" />
-  </label>
+<p>Edit user</p>
 
-  <label
-    for="firstName"
-    [class]="!validField(userForm, 'firstName') ? '' : 'text-red-400'"
-  >
-    First name
-    <input type="text" formControlName="firstName" />
-  </label>
-
-  <label
-    for="lastName"
-    [class]="!validField(userForm, 'lastName') ? '' : 'text-red-400'"
-  >
-    Last name
-    <input type="text" formControlName="lastName" />
-  </label>
-
-  <label
-    for="email"
-    [class]="!validField(userForm, 'email') ? '' : 'text-red-400'"
-  >
-    Email
-    <input type="email" formControlName="email" />
-  </label>
-
-  <label
-    for="phone"
-    [class]="!validField(userForm, 'phone') ? '' : 'text-red-400'"
-  >
-    Phone
-    <input type="text" formControlName="phone" />
-  </label>
-
-  <button type="submit">Save</button>
-</form>
+<dynamic-form-component
+  [formGroup]="userForm"
+  [fields]="formFields"
+  submitButtonText="Save"
+  (formSubmit)="editUser()"
+/>
