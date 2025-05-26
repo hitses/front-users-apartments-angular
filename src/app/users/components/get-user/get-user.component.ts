@@ -2,14 +2,13 @@ import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../../../../interfaces/user';
 import { UsersService } from '../../users.service';
-import { BackButtonComponent } from '../../../common/components/back-button/back-button.component';
-import { JsonPipe } from '@angular/common';
+import { FormHeadComponent } from '../../../common/components/form-head/form-head.component';
+import { DatePipe, TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-users',
-  imports: [BackButtonComponent, JsonPipe],
+  imports: [FormHeadComponent, TitleCasePipe, DatePipe],
   templateUrl: './get-user.component.html',
-  styleUrl: './get-user.component.scss',
 })
 export default class GetUsersComponent {
   userId = signal<number>(0);

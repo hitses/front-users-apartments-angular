@@ -6,6 +6,8 @@ export interface User {
   email: string;
   password: string;
   phone: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface UserTable {
