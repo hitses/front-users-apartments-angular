@@ -2,14 +2,13 @@ import { Component, inject, signal } from '@angular/core';
 import { Apartment } from '../../../../interfaces/apartment';
 import { ActivatedRoute } from '@angular/router';
 import { ApartmentsService } from '../../apartments.service';
-import { BackButtonComponent } from '../../../common/components/back-button/back-button.component';
-import { JsonPipe } from '@angular/common';
+import { CurrencyPipe, DatePipe, TitleCasePipe } from '@angular/common';
+import { FormHeadComponent } from '../../../common/components/form-head/form-head.component';
 
 @Component({
   selector: 'app-get-apartment',
-  imports: [BackButtonComponent, JsonPipe],
+  imports: [FormHeadComponent, TitleCasePipe, CurrencyPipe, DatePipe],
   templateUrl: './get-apartment.component.html',
-  styleUrl: './get-apartment.component.scss',
 })
 export default class GetApartmentComponent {
   apartmentId = signal<number>(0);
