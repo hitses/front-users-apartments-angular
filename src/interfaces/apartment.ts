@@ -6,6 +6,8 @@ export interface Apartment {
   floor: number;
   description: string;
   price: number;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface ApartmentTable {
