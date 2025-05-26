@@ -8,7 +8,7 @@
         @for (col of columns(); track $index) {
         <th class="px-4 py-2">{{ col.header }}</th>
         }
-        <th class="px-4 py-2">Acciones</th>
+        <th class="px-4 py-2">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -17,7 +17,7 @@
         @for (col of columns(); track $index) {
         <td class="px-4 py-2">{{ item[col.field] }}</td>
         }
-        <td class="px-4 py-2 flex justify-end gap-2">
+        <td class="px-4 py-2 flex justify-evenly gap-2">
           @if (viewRoutePrefix()) {
           <a
             [routerLink]="getViewRoute(item)"

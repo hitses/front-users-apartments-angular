@@ -1,12 +1,20 @@
-<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+<form
+  [formGroup]="formGroup"
+  (ngSubmit)="onSubmit()"
+  class="flex flex-col gap-4 mt-8 w-96"
+>
   @for (field of fields; track field.name) { @if (!field.hidden) {
   <label
     [for]="field.name"
     [class]="!isValidField(formGroup, field.name) ? '' : 'text-red-400'"
+    class="flex flex-col gap-2 text-xs"
   >
     {{ field.label }}
     @if (field.type === 'textarea') {
-    <textarea [formControlName]="field.name"></textarea>
+    <textarea
+      [formControlName]="field.name"
+      class="border border-gray-300 text-base p-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-transparent focus:shadow-sm hover:shadow-sm transition-shadow duration-200"
+    ></textarea>
     } @else {
     <input
       [type]="field.type"
@@ -14,10 +22,18 @@
       [min]="field.min"
       [max]="field.max"
       [step]="field.step"
+      class="border border-gray-300 text-base p-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-transparent focus:shadow-sm hover:shadow-sm transition-shadow duration-200"
     />
     }
   </label>
   } }
 
-  <button type="submit">{{ submitButtonText }}</button>
+  <button
+    type="submit"
+    [disabled]="formGroup.invalid"
+    class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+    [class]="formGroup.invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
+  >
+    {{ submitButtonText }}
+  </button>
 </form>

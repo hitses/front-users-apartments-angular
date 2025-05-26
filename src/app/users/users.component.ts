@@ -15,7 +15,7 @@ export default class UsersComponent {
   users = signal<User[]>([]);
   userColumns = signal<TableColumn[]>([
     { field: 'id', header: 'ID' },
-    { field: 'firstName', header: 'Nombre' },
+    { field: 'firstName', header: 'Name' },
     { field: 'email', header: 'Email' },
   ]);
 

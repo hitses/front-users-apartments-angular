@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { ApartmentsService } from '../../apartments.service';
-import { BackButtonComponent } from '../../../common/components/back-button/back-button.component';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {
@@ -12,10 +11,11 @@ import {
   markAllFormFieldsAsTouched,
 } from '../../../common/utils/form-validation';
 import { DynamicFormComponent } from '../../../common/components/dynamic-form/dynamic-form.component';
+import { FormHeadComponent } from '../../../common/components/form-head/form-head.component';
 
 @Component({
   selector: 'app-new',
-  imports: [BackButtonComponent, DynamicFormComponent],
+  imports: [DynamicFormComponent, FormHeadComponent],
   templateUrl: './new.component.html',
   styleUrl: './new.component.scss',
 })

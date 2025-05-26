@@ -1,22 +1,21 @@
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Apartment } from '../../../../interfaces/apartment';
 import { ApartmentsService } from '../../apartments.service';
-import { BackButtonComponent } from '../../../common/components/back-button/back-button.component';
 import {
   isValidField,
   markAllFormFieldsAsTouched,
 } from '../../../common/utils/form-validation';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import {
   apartmentFields,
   apartmentFormValidations,
 } from '../../forms/apartment';
 import { DynamicFormComponent } from '../../../common/components/dynamic-form/dynamic-form.component';
+import { FormHeadComponent } from '../../../common/components/form-head/form-head.component';
 
 @Component({
   selector: 'app-edit',
-  imports: [BackButtonComponent, DynamicFormComponent],
+  imports: [DynamicFormComponent, FormHeadComponent],
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.scss',
 })

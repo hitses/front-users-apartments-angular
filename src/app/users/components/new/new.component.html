@@ -1,10 +1,9 @@
-<back-button-component />
-
-<h1>New user</h1>
+<form-head-component title="New user" />
 
 <dynamic-form-component
   [formGroup]="userForm"
   [fields]="formFields"
   submitButtonText="Create"
   (formSubmit)="createUser()"
+  class="flex justify-center"
 />

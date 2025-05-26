@@ -1,10 +1,9 @@
-<back-button-component />
-
-<p>Edit user</p>
+<form-head-component title="Edit user" />
 
 <dynamic-form-component
   [formGroup]="userForm"
   [fields]="formFields"
   submitButtonText="Save"
   (formSubmit)="editUser()"
+  class="flex justify-center"
 />
