@@ -4,6 +4,7 @@ import { Apartment } from '../../interfaces/apartment';
 import { TableColumn } from '../../interfaces/table-column';
 import { DynamicTableComponent } from '../common/components/dynamic-table/dynamic-table.component';
 import { PageHeadComponent } from '../common/components/page-head/page-head.component';
+import { ConfirmationService } from '../common/services/confirmation-service.service';
 
 @Component({
   selector: 'app-apartments',
@@ -20,6 +21,7 @@ export default class ApartmentsComponent {
   ]);
 
   private apartmentsService = inject(ApartmentsService);
+  private readonly confirmationService = inject(ConfirmationService);
 
   ngOnInit() {
     this.findAllApartments();
@@ -33,9 +35,11 @@ export default class ApartmentsComponent {
   }
 
   deleteApartment(id: number): void {
-    this.apartmentsService.deleteApartment(id).subscribe({
-      next: () => this.findAllApartments(),
-      error: (err) => console.log('ERROR', err),
-    });
+    this.confirmationService.confirmAndDelete(
+      id,
+      'Apartment',
+      (apartmentId) => this.apartmentsService.deleteApartment(apartmentId),
+      () => this.findAllApartments()
+    );
   }
 }

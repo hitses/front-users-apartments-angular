@@ -4,6 +4,7 @@ import { UsersService } from './users.service';
 import { DynamicTableComponent } from '../common/components/dynamic-table/dynamic-table.component';
 import { TableColumn } from '../../interfaces/table-column';
 import { PageHeadComponent } from '../common/components/page-head/page-head.component';
+import { ConfirmationService } from '../common/services/confirmation-service.service';
 
 @Component({
   selector: 'app-users',
@@ -20,6 +21,7 @@ export default class UsersComponent {
   ]);
 
   private usersService = inject(UsersService);
+  private readonly confirmationService = inject(ConfirmationService);
 
   ngOnInit() {
     this.findAllUsers();
@@ -31,10 +33,12 @@ export default class UsersComponent {
     });
   }
 
-  deleteUser(id: number) {
-    this.usersService.deleteUser(id).subscribe({
-      next: () => this.findAllUsers(),
-      error: (err) => console.log('ERROR', err),
-    });
+  deleteUser(id: number): void {
+    this.confirmationService.confirmAndDelete(
+      id,
+      'User',
+      (userId) => this.usersService.deleteUser(userId),
+      () => this.findAllUsers()
+    );
   }
 }
