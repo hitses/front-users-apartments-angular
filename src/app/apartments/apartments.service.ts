@@ -1,14 +1,15 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Apartment } from '../../interfaces/apartment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { catchError, map, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { Apartment } from '../../interfaces/apartment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApartmentsService {
-  baseUrl = signal<string>('http://localhost:3000/apartments');
+  baseUrl = signal<string>(`http://localhost:${environment.port}/apartments`);
 
   private readonly http = inject(HttpClient);
 

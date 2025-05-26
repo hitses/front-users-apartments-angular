@@ -1,13 +1,14 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, Observable, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { User } from '../../interfaces/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
-  baseUrl = signal<string>('http://localhost:3000/users');
+  baseUrl = signal<string>(`http://localhost:${environment.port}/users`);
 
   private readonly http = inject(HttpClient);
 

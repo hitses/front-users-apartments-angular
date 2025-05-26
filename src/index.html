@@ -5,7 +5,25 @@
     <title>FrontUsersApartmentsAngular</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <!-- Favicon por defecto (Y para navegadores que no soportan la carga con modos claro y oscuro) -->
+    <link rel="icon" type="image/svg+xml" href="favicon-light.ico" />
+
+    <!-- Los favicon se cargan en modo claro y oscuro dinámicamente dependiendo del modo del sistema, no de la página web -->
+    <!-- Favicon para modo claro -->
+    <link
+      rel="icon"
+      href="favicon-light.svg"
+      type="image/svg+xml"
+      media="(prefers-color-scheme: light)"
+    />
+
+    <!-- Favicon para modo oscuro -->
+    <link
+      rel="icon"
+      href="favicon-dark.svg"
+      type="image/svg+xml"
+      media="(prefers-color-scheme: dark)"
+    />
   </head>
   <body>
     <app-root></app-root>
