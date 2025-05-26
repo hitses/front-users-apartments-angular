@@ -1,4 +1,9 @@
-export type ColumnPipeType = 'titlecase' | 'currency' | 'date' | 'none';
+export type ColumnPipeType =
+  | 'titlecase'
+  | 'currency'
+  | 'date'
+  | 'lowercase'
+  | 'none';
 
 export interface TableColumn {
   header: string;

@@ -16,7 +16,7 @@ export default class UsersComponent {
   userColumns = signal<TableColumn[]>([
     { field: 'id', header: 'ID' },
     { field: 'firstName', header: 'Name', pipe: 'titlecase' },
-    { field: 'email', header: 'Email' },
+    { field: 'email', header: 'Email', pipe: 'lowercase' },
   ]);
 
   private usersService = inject(UsersService);

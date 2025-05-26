@@ -18,6 +18,8 @@
         <td class="px-4 py-2">
           @switch (col.pipe) { @case ('titlecase') {
           {{ item[col.field] | titlecase }}
+          } @case ('lowercase') {
+          {{ item[col.field] | lowercase }}
           } @case ('currency') {
           {{
             item[col.field]

@@ -3,11 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from '../../../../interfaces/user';
 import { UsersService } from '../../users.service';
 import { FormHeadComponent } from '../../../common/components/form-head/form-head.component';
-import { DatePipe, TitleCasePipe } from '@angular/common';
+import { DatePipe, LowerCasePipe, TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-users',
-  imports: [FormHeadComponent, TitleCasePipe, DatePipe],
+  imports: [FormHeadComponent, TitleCasePipe, LowerCasePipe, DatePipe],
   templateUrl: './get-user.component.html',
 })
 export default class GetUsersComponent {
