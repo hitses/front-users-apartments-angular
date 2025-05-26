@@ -15,7 +15,27 @@
       @for (item of data(); track $index) {
       <tr class="odd:bg-gray-50 even:bg-white">
         @for (col of columns(); track $index) {
-        <td class="px-4 py-2">{{ item[col.field] }}</td>
+        <td class="px-4 py-2">
+          @switch (col.pipe) { @case ('titlecase') {
+          {{ item[col.field] | titlecase }}
+          } @case ('currency') {
+          {{
+            item[col.field]
+              | currency
+                : col.pipeArgs![0]
+                : col.pipeArgs![1]
+                : col.pipeArgs![2]
+                : col.pipeArgs![3]
+          }}
+          } @case ('date') {
+          {{
+            item[col.field]
+              | date : col.pipeArgs![0] : col.pipeArgs![1] : col.pipeArgs![2]
+          }}
+          } @default {
+          {{ item[col.field] }}
+          } }
+        </td>
         }
         <td class="px-4 py-2 flex justify-evenly gap-2">
           @if (viewRoutePrefix()) {

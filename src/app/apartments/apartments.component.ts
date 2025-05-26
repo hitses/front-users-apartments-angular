@@ -17,7 +17,12 @@ export default class ApartmentsComponent {
   apartmentColumns = signal<TableColumn[]>([
     { field: 'id', header: 'ID' },
     { field: 'rooms', header: 'Rooms' },
-    { field: 'price', header: 'Price' },
+    {
+      field: 'price',
+      header: 'Price',
+      pipe: 'currency',
+      pipeArgs: ['EUR', 'symbol', '1.2-2'],
+    },
   ]);
 
   private apartmentsService = inject(ApartmentsService);

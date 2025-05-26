@@ -10,13 +10,12 @@ import { ConfirmationService } from '../common/services/confirmation-service.ser
   selector: 'app-users',
   imports: [DynamicTableComponent, PageHeadComponent],
   templateUrl: './users.component.html',
-  styleUrl: './users.component.scss',
 })
 export default class UsersComponent {
   users = signal<User[]>([]);
   userColumns = signal<TableColumn[]>([
     { field: 'id', header: 'ID' },
-    { field: 'firstName', header: 'Name' },
+    { field: 'firstName', header: 'Name', pipe: 'titlecase' },
     { field: 'email', header: 'Email' },
   ]);
 
