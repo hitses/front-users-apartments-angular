@@ -1,3 +1,4 @@
+// Interfaz de usuario para garantizar la consistencia de los datos del usuario en la aplicación
 export interface User {
   id?: number;
   username: string;
@@ -8,10 +9,4 @@ export interface User {
   phone: string;
   createdAt?: Date;
   updatedAt?: Date;
-}
-
-export interface UserTable {
-  id: number;
-  firstName: string;
-  email: string;
 }

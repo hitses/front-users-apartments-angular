@@ -1,3 +1,4 @@
+// Interfaz de apartamento para garantizar la consistencia de los datos del apartamento en la aplicación
 export interface Apartment {
   id?: number;
   rooms: number;
@@ -8,10 +9,4 @@ export interface Apartment {
   price: number;
   createdAt?: Date;
   updatedAt?: Date;
-}
-
-export interface ApartmentTable {
-  id: number;
-  rooms: number;
-  price: number;
 }
