@@ -6,5 +6,6 @@ import { Component, input } from '@angular/core';
   templateUrl: './page-title.component.html',
 })
 export class PageTitleComponent {
+  // Propiedad del componente
   title = input<string>('Page title');
 }

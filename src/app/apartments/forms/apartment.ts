@@ -1,6 +1,7 @@
 import { FormControl, Validators } from '@angular/forms';
 import { FormField } from '../../../types/form-field';
 
+// Definiciones de los campos del formulario reactivo para crear un nuevo apartamento o editar uno existente
 export const apartmentFormValidations = {
   rooms: new FormControl('', [Validators.required, Validators.min(1)]),
   bathrooms: new FormControl('', [Validators.required, Validators.min(1)]),
@@ -14,6 +15,7 @@ export const apartmentFormValidations = {
   price: new FormControl('', [Validators.required, Validators.min(0)]),
 };
 
+// Lista de los campos y sus demás etiquetas que se mostrarán en el formulario dinámico para crear un nuevo apartamento
 export const apartmentFields: FormField[] = [
   { name: 'rooms', label: 'Rooms', type: 'number', min: 1 },
   { name: 'bathrooms', label: 'Bathrooms', type: 'number', min: 1 },

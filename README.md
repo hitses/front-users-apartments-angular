@@ -1,59 +1,12 @@
 # FrontUsersApartmentsAngular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.11.
+## Variables de entorno
 
-## Development server
+En la ruta `src/environments` se encuentran los archivos de variables de entorno para cada entorno de desarrollo.
 
-To start a local development server, run:
+- `environment.development.ts`: Variables de entorno para desarrollo
+- `environment.ts`: Variables de entorno para producción
 
-```bash
-ng serve
-```
+En estos archivos se ha definido la variable `devPort` que sirve para definir el puerto en el que se ejecutará la aplicación.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Por defecto se define el puerto como `3000` para ambos entornos. En caso de necesitar otro, se deberá cambiar únicamente la variable `devPort` en el archivo `environment.development.ts` si se inicia el servicio en modo desarrollo o en el archivo `environment.ts` si se realiza la construcción de la aplicación en modo producción con el comando `ng build` o en ambos para asegurar un correcto funcionamiento de la aplicación en el ordenador del desarrollador.

@@ -8,6 +8,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './page-head.component.html',
 })
 export class PageHeadComponent {
+  // Propiedades entrantes del componente
   pageTitle = input<string>('Page title');
   link = input<string>('/users');
   linkText = input<string>('Users');

@@ -1,70 +1,95 @@
 <section class="mt-4">
+  <!-- Si no obtenemos datos que mostrar en la tabla, si indica al usuario con un mensaje bien clarito, que no hay datos disponibles -->
   @if (data().length <= 0) {
-  <p class="text-center text-sm">No data available</p>
+    <p class="text-center text-sm">No data available</p>
+    <!-- Sin embargo, si hay datos, se muestra la tabla dinámica -->
   } @else {
-  <table class="w-full text-sm text-left text-gray-900">
-    <thead class="font-semibold uppercase bg-gray-100">
-      <tr>
-        @for (col of columns(); track $index) {
-        <th class="px-4 py-2">{{ col.header }}</th>
-        }
-        <th class="px-4 py-2">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (item of data(); track $index) {
-      <tr class="odd:bg-gray-50 even:bg-white">
-        @for (col of columns(); track $index) {
-        <td class="px-4 py-2">
-          @switch (col.pipe) { @case ('titlecase') {
-          {{ item[col.field] | titlecase }}
-          } @case ('lowercase') {
-          {{ item[col.field] | lowercase }}
-          } @case ('currency') {
-          {{
-            item[col.field]
-              | currency
-                : col.pipeArgs![0]
-                : col.pipeArgs![1]
-                : col.pipeArgs![2]
-                : col.pipeArgs![3]
-          }}
-          } @case ('date') {
-          {{
-            item[col.field]
-              | date : col.pipeArgs![0] : col.pipeArgs![1] : col.pipeArgs![2]
-          }}
-          } @default {
-          {{ item[col.field] }}
-          } }
-        </td>
-        }
-        <td class="px-4 py-2 flex justify-evenly gap-2">
-          @if (viewRoutePrefix()) {
-          <a
-            [routerLink]="getViewRoute(item)"
-            class="bg-blue-400 px-2 py-1 rounded-md text-white hover:bg-blue-500 transition-colors"
-          >
-            <file-icon />
-          </a>
-          } @if (editRoutePrefix()) {
-          <a
-            [routerLink]="getEditRoute(item)"
-            class="bg-yellow-400 px-2 py-1 rounded-md hover:bg-yellow-500 transition-colors"
-          >
-            <edit-icon />
-          </a>
+    <table class="w-full text-sm text-left text-gray-900">
+      <thead class="font-semibold uppercase bg-gray-100">
+        <!-- Se carga en la cabecera de la tabla el título de cada columna dinámicamente... -->
+        <tr>
+          @for (col of columns(); track $index) {
+            <th class="px-4 py-2">{{ col.header }}</th>
           }
-          <button
-            (click)="onDelete(item.id)"
-            class="bg-red-500 px-2 py-1 rounded-md text-white hover:bg-red-600 cursor-pointer transition-colors"
-          >
-            <trash-icon />
-          </button>
-        </td>
-      </tr>
-      }
-    </tbody>
-  </table>
+          <!-- ... junto a columnas fijas que aparecerán en todas y cada una de las tablas dinámicas que creemos -->
+          <th class="px-4 py-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Y aquí cargamos cada una de las filas con sus correspondientes campos -->
+        @for (item of data(); track $index) {
+          <tr class="odd:bg-gray-50 even:bg-white">
+            <!-- Y aquí por cada elementos en cada campo seleccionamos el pipe que queramos aplicar para que los datos se vean bien bonicos y estilosos, porque ellos lo valen: L'Oréal -->
+            @for (col of columns(); track $index) {
+              <td class="px-4 py-2">
+                @switch (col.pipe) {
+                  @case ("titlecase") {
+                    <!-- pa nombres propios -->
+                    {{ item[col.field] | titlecase }}
+                  }
+                  @case ("lowercase") {
+                    <!-- pa emails y sucedáneos -->
+                    {{ item[col.field] | lowercase }}
+                  }
+                  @case ("currency") {
+                    <!-- pa precios y cantidades -->
+                    {{
+                      item[col.field]
+                        | currency
+                          : col.pipeArgs![0]
+                          : col.pipeArgs![1]
+                          : col.pipeArgs![2]
+                          : col.pipeArgs![3]
+                    }}
+                  }
+                  @case ("date") {
+                    <!-- pa fechas y horas -->
+                    {{
+                      item[col.field]
+                        | date
+                          : col.pipeArgs![0]
+                          : col.pipeArgs![1]
+                          : col.pipeArgs![2]
+                    }}
+                  }
+                  @default {
+                    <!-- pa cualquier otro caso que no requiera formateao -->
+                    {{ item[col.field] }}
+                  }
+                }
+              </td>
+            }
+            <!-- Y aquí el campo con los enlaces de acción -->
+            <td class="px-4 py-2 flex justify-evenly gap-2">
+              <!-- El enlace del detalle del elemento, con su iconico -->
+              @if (viewRoutePrefix()) {
+                <a
+                  [routerLink]="getViewRoute(item)"
+                  class="bg-blue-400 px-2 py-1 rounded-md text-white hover:bg-blue-500 transition-colors"
+                >
+                  <file-icon />
+                </a>
+              }
+              <!-- El enlace para editar el elemento, también con su iconico -->
+              @if (editRoutePrefix()) {
+                <a
+                  [routerLink]="getEditRoute(item)"
+                  class="bg-yellow-400 px-2 py-1 rounded-md hover:bg-yellow-500 transition-colors"
+                >
+                  <edit-icon />
+                </a>
+              }
+              <!-- Y el botón de eliminación del elemento, cómo no, con su iconico. La razón de por qué es un botón en vez de un anchor es simple: es sintácticamente correcto. Es mejor un botón con una acción y un anchor con un enalce, así de simple -->
+              <button
+                (click)="onDelete(item.id)"
+                class="bg-red-500 px-2 py-1 rounded-md text-white hover:bg-red-600 cursor-pointer transition-colors"
+              >
+                <trash-icon />
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
   }
 </section>

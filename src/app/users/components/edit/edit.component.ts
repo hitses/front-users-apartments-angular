@@ -18,19 +18,21 @@ import { FormHeadComponent } from '../../../common/components/form-head/form-hea
   selector: 'app-edit',
   imports: [DynamicFormComponent, FormHeadComponent],
   templateUrl: './edit.component.html',
-  styleUrl: './edit.component.scss',
 })
 export default class EditComponent {
+  // Propiedades del componente
   public formFields = userEditFields;
   public validField = isValidField;
 
   userId = signal<number>(0);
 
+  // Inyección de dependencias (no se usa el constructor)
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
   private readonly fb = inject(FormBuilder);
   private readonly usersService = inject(UsersService);
 
+  // Se inicializa el formulario reactivo para editar un usuario, eliminando los campos de contraseña y confirmación de contraseña
   constructor() {
     this.userForm = this.fb.group(userFormValidations, {
       validators: userFormValidators,
@@ -40,15 +42,19 @@ export default class EditComponent {
     this.userForm.removeControl('confirmPassword');
   }
 
+  // Se obtiene el ID del usuario desde la ruta y se carga el usuario al inicializar el componente
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.userId.set(params['id']);
+
       this.getUser();
     });
   }
 
+  // Formulario reactivo para editar un usuario
   userForm: FormGroup;
 
+  // Se obtiene el usuario usando el servicio de usuarios
   getUser() {
     this.usersService.findUser(this.userId()).subscribe({
       next: (user) => this.userForm.patchValue(user),
@@ -59,13 +65,16 @@ export default class EditComponent {
     });
   }
 
+  // Se edita el usuario usando el servicio de usuarios y se redirecciona a la página de usuarios si todo va bien, que seguro que todo irá bien, te lo digo yo que lo he programado
   editUser() {
+    // Si el formulario, por alguna razón que se escape al control del desarrollador, no es válido, se marcan todos los campos como "tocados" para que se muestren errores en los campos incorrectos, aunque el botón de editar no se active hasta que el formulario sea válido
     if (this.userForm.invalid) {
       markAllFormFieldsAsTouched(this.userForm);
 
       return;
     }
 
+    // Se llama al servicio de usuarios para editar el usuario
     this.usersService.updateUser(this.userId(), this.userForm.value).subscribe({
       next: () => this.router.navigate(['/users']),
       // TODO: mostrar un mensaje de error

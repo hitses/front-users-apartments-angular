@@ -7,5 +7,6 @@ import { BackButtonComponent } from '../back-button/back-button.component';
   templateUrl: './form-head.component.html',
 })
 export class FormHeadComponent {
+  // Propiedad entrante del componente
   title = input<string>('Form Title');
 }

@@ -1,6 +1,8 @@
 <div class="flex justify-between items-center">
+  <!-- Aquí cargamos el h1 de otro componente que, al serúnicamente un h1, no tiene mucho sentido, pero en la práctica es algo normal, puesto que una web suele tener más que un h1, como los breadcrumbs (camino de navegación o 'migas de pan') -->
   <page-title-component [title]="pageTitle()" />
 
+  <!-- Enlace que lleva a la creación de un nuevo elemento en la base de datos -->
   <a
     [routerLink]="link()"
     class="bg-green-600 text-white px-2 py-1 rounded-md hover:bg-green-700 transition-colors"

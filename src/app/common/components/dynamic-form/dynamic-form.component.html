@@ -3,31 +3,41 @@
   (ngSubmit)="onSubmit()"
   class="flex flex-col gap-4 mt-8 w-96"
 >
-  @for (field of fields; track field.name) { @if (!field.hidden) {
-  <label
-    [for]="field.name"
-    [class]="!isValidField(formGroup, field.name) ? '' : 'text-red-400'"
-    class="flex flex-col gap-2 text-xs"
-  >
-    {{ field.label }}
-    @if (field.type === 'textarea') {
-    <textarea
-      [formControlName]="field.name"
-      class="border border-gray-300 text-base p-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-transparent focus:shadow-sm hover:shadow-sm transition-shadow duration-200"
-    ></textarea>
-    } @else {
-    <input
-      [type]="field.type"
-      [formControlName]="field.name"
-      [min]="field.min"
-      [max]="field.max"
-      [step]="field.step"
-      class="border border-gray-300 text-base p-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-transparent focus:shadow-sm hover:shadow-sm transition-shadow duration-200"
-    />
+  <!-- Aquí se crea cada campo necesario para el formulario dinámico, ahorrándonos muuuuuuuuuuuucho trabajo para cada campo del formulario al no tener que crearlos a mano -->
+  @for (field of fields; track field.name) {
+    <!-- Si el campo no tiene la propiedad hidden, se crea -->
+    @if (!field.hidden) {
+      <!-- Con su etiqueta, porque por gustos no suelo usar el placeholder, aunque no estoy en contra de ello -->
+      <!-- Nótese que la clase es dinámica para mostrar la etiqueta en rojo si el campo no es válido, proporcionanda al usuario una forma de saber que hay errores en el campo -->
+      <!-- También se podría cambiar el texto de la etiqueta para que se vea más claro el error del campo -->
+      <label
+        [for]="field.name"
+        [class]="!isValidField(formGroup, field.name) ? '' : 'text-red-400'"
+        class="flex flex-col gap-2 text-xs"
+      >
+        {{ field.label }}
+        <!-- Si el tipo de campo es de tipo textarea, pues se crea un textarea, no se va a crear un input de número -->
+        @if (field.type === "textarea") {
+          <textarea
+            [formControlName]="field.name"
+            class="border border-gray-300 text-base p-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-transparent focus:shadow-sm hover:shadow-sm transition-shadow duration-200"
+          ></textarea>
+        } @else {
+          <!-- Por el contrario, si se crea un input, se le indica el tipo y demás propieades a la hora de crearlo -->
+          <input
+            [type]="field.type"
+            [formControlName]="field.name"
+            [min]="field.min"
+            [max]="field.max"
+            [step]="field.step"
+            class="border border-gray-300 text-base p-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-transparent focus:shadow-sm hover:shadow-sm transition-shadow duration-200"
+          />
+        }
+      </label>
     }
-  </label>
-  } }
+  }
 
+  <!-- Y llegamos al botón de envío del formulario, que se mantiene deshabilitado hasta que todos los campos sean válidos -->
   <button
     type="submit"
     [disabled]="formGroup.invalid"

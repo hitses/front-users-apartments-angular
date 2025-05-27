@@ -5,9 +5,9 @@ import { ChevronLeftComponent } from '../../icons/chevron-left/chevron-left.comp
   selector: 'back-button-component',
   imports: [ChevronLeftComponent],
   templateUrl: './back-button.component.html',
-  styleUrl: './back-button.component.scss',
 })
 export class BackButtonComponent {
+  // Método que envía hacia atrás en el historial de navegación al usuario, pudiendo dar lugar a un error si es la primera página que visita, pero nada preocupante o visible, puesto que simplemente no accionaría ningún evento
   goBack() {
     window.history.back();
   }
